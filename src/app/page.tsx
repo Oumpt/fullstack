@@ -1,6 +1,7 @@
+'use client'
 import Head from 'next/head'
-import { useState } from 'react'
-
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 interface DataType {
   id : number;
   name : string;
@@ -11,6 +12,14 @@ interface DataType {
 export default function Home() {
 
   const [products, setProducts] = useState<DataType[]>([])
+  useEffect(() => {
+    (async() => {
+        const products = await axios.get('/api/products')
+        if(products.data.data){
+          setProducts(products.data.data)
+        }
+    })()
+  }, [])
 
 
   return (
