@@ -12,6 +12,7 @@ interface DataType {
 export default function Home() {
 
   const [products, setProducts] = useState<DataType[]>([])
+
   useEffect(() => {
     (async() => {
         const products = await axios.get('/api/products')
