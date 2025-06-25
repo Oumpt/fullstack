@@ -2,7 +2,9 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Products } from '@/generated/prisma';
 interface DataType {
+
   id : number;
   name : string;
   price : number;
@@ -11,7 +13,7 @@ interface DataType {
 
 export default function Home() {
 
-  const [products, setProducts] = useState<DataType[]>([])
+  const [products, setProducts] = useState<Products[]>([])
 
   useEffect(() => {
     (async() => {
