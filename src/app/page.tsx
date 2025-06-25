@@ -26,12 +26,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sinsamuth - Home</title>
+        <title>Pongthep - Home</title>
       </Head>
 
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">Sinsamuth</h1>
+          <h1 className="text-2xl font-bold text-blue-600">Pongthep</h1>
           <nav className="space-x-4">
             <a href="#" className="text-gray-600 hover:text-blue-500">Home</a>
             <a href="#" className="text-gray-600 hover:text-blue-500">Shop</a>
@@ -42,7 +42,7 @@ export default function Home() {
 
       <main className="bg-gray-50 min-h-screen">
         <section className="bg-blue-100 text-center py-16">
-          <h2 className="text-4xl font-bold text-blue-800 mb-4">Welcome to Sinsamuth</h2>
+          <h2 className="text-4xl font-bold text-blue-800 mb-4">Welcome to Pongthep</h2>
           <p className="text-lg text-blue-700">Your one-stop shop for everyday essentials</p>
         </section>
 
@@ -62,7 +62,7 @@ export default function Home() {
 
       <footer className="bg-white shadow-inner py-6">
         <div className="container mx-auto text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Sinsamuth. All rights reserved.
+          &copy; {new Date().getFullYear()} Pongthep. All rights reserved.
         </div>
       </footer>
     </>
