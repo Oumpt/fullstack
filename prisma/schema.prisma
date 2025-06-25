@@ -8,6 +8,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Products {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  price   Int
+  image   String
+}
+
 model User {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   username String
