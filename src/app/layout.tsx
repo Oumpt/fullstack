@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sinsamuth SHOP",
-  description: "Khao Seekakun 049",
+  title: "Pongthep SHOP",
+  description: "Pongthep 046",
 };
 
 export default function RootLayout({
