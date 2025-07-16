@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Pongthepp - Home</title>
+        <title>Pongtheppp - Home</title>
       </Head>
 
       <header className="bg-white shadow-md">
