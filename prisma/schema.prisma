@@ -13,6 +13,7 @@ model Products {
   name    String
   price   Int
   image   String
+  description String?
 }
 
 model User {
