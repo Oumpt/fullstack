@@ -77,7 +77,7 @@ const LoginPage: React.FC = () => {
                     onClick={login}
                     className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
-                    {loginSuccess ? "เข้าสู่ระบบสำเร็จ" : loading ? "กำลังเข้าสูาระบบ" : message != "" ? message : "Login"}
+                    {loginSuccess ? "เข้าสู่ระบบสำเร็จ" : loading ? "กำลังเข้าสู่ระบบ" : message != "" ? message : "Login"}
                 </button>
                 <p className="mt-4 text-sm text-center text-gray-600">
                     Don't have an account?{' '}
