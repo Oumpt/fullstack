@@ -1,11 +1,47 @@
-import React from 'react';
+'use client'
+import axios from 'axios';
+import React, { useState } from 'react';
 
 const RegisterPage = () => {
+    
+        const [username, setUsername] = useState("")
+        const [email, setEmail] = useState("")
+        const [password, setPassword] = useState("")
+        const [loading, setLoading] = useState(false)
+        const [message, setMessage] = useState("")
+        const [RegisterSuccess, setRegister] = useState(false)
+
+            const register = async () => {
+        try {
+            setLoading(true)
+            const res = await axios.post('/api/register', {
+                email,
+                password,
+                username,
+            })
+            if (res.status) {
+                console.log(res.data)
+                if (res.data.message) {
+                    setMessage(res.data.message)
+
+                    setTimeout(() => {
+                        setMessage("")
+                    }, 5000);
+                } else {
+                    setRegister(true)
+                }
+            }
+        } catch (error) {
+
+        }
+        finally {
+            setLoading(false)
+        }
+    }
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
                 <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Register</h1>
-                <form>
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                             Username
@@ -16,6 +52,8 @@ const RegisterPage = () => {
                             name="username"
                             className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter your username"
+                            onChange={(v) => setUsername(v.currentTarget.value)}
+                            value={username}
                         />
                     </div>
                     <div className="mb-4">
@@ -28,6 +66,8 @@ const RegisterPage = () => {
                             name="email"
                             className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter your email"
+                            onChange={(v) => setEmail(v.currentTarget.value)}
+                            value={email}
                         />
                     </div>
                     <div className="mb-4">
@@ -40,15 +80,16 @@ const RegisterPage = () => {
                             name="password"
                             className="w-full px-4 py-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter your password"
+                            onChange={(v) => setPassword(v.currentTarget.value)}
+                            value={password}
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        Register
-                    </button>
-                </form>
+                <button
+                    onClick={register}
+                    className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                    {RegisterSuccess ? "สมัครสมาชิกสำเร็จ" : loading ? "กำลังสมัครสมาชิก" : message != "" ? message : "Register"}
+                </button>
                 <p className="mt-4 text-sm text-center text-gray-600">
                     Already have an account?{' '}
                     <a href="/login" className="text-blue-500 hover:underline">
