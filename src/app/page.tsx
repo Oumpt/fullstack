@@ -9,6 +9,7 @@ interface DataType {
   name : string;
   price : number;
   image : string;
+  description?: string;
 }
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Pongthep - Home</title>
+        <title>Pongthepp - Home</title>
       </Head>
 
       <header className="bg-white shadow-md">
