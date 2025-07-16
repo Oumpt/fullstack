@@ -56,7 +56,8 @@ export default function Home() {
               <div key={product.id} className="bg-white rounded-lg shadow p-4">
                 <img src={product.image} alt={product.name} className="w-full h-64 object-cover rounded" />
                 <h4 className="mt-4 text-lg font-semibold">{product.name}</h4>
-                <p className="text-blue-600 font-bold">{product.price}</p>
+                <p className="text-red-600 font-bold">{product.price}</p>
+                <p className="mt-2 text-gray-700">{product.description}</p>
               </div>
             ))}
           </div>
