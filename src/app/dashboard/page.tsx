@@ -39,6 +39,6 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="m-5">ยินดีต้อนรับ , {user.username} <button onClick={logout} className="py-2 px-2 bg-red-500  rounded-lg"> Logout </button></div>
+    <div className="m-5">ยินดีต้อนรับ <button onClick={logout} className="py-2 px-2 bg-red-500  rounded-lg"> Logout </button></div>
   )
 }
