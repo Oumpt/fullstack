@@ -1,0 +1,9 @@
+export default function footer() {
+  return (
+      <footer className="bg-white shadow-inner py-6">
+        <div className="container mx-auto text-center text-gray-500 text-sm">
+          &copy; {new Date().getFullYear()} Pongthep. All rights reserved.
+        </div>
+      </footer>
+  )
+}

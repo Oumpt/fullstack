@@ -1,51 +1,59 @@
 import { prisma } from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { sign } from "jsonwebtoken"
+import { sign } from "jsonwebtoken";
+
 interface RegisterBody {
-    email: string;
-    password: string;
-    username : string;
+  email: string;
+  password: string;
+  username: string;
 }
+
 export async function POST(req: NextRequest) {
-    try {
-        const body = await req.json() as RegisterBody;
+  try {
+    const body = (await req.json()) as RegisterBody;
 
-        if (!body) return NextResponse.json({
-            message: "Body inVaild"
-        })
-        if (!body.email || !body.password || !body.username) return NextResponse.json({
-            message: "Please enter email and password"
-        })
-        const hasPassword = createHash('sha256').update(body.password).digest('hex')
-        console.log(hasPassword)
-        const user = await prisma.user.findFirst({
-            where: {
-                email: body.email.toLowerCase()
-            }
-        })
+    if (!body)
+      return NextResponse.json({
+        message: "Body Invalid",
+      });
 
-        if (user) return NextResponse.json({
-            message: "user is Already"
-        })
+    if (!body.email || !body.password || !body.username)
+      return NextResponse.json({
+        message: "Please provide email and password and username",
+      });
 
-        const newData = await prisma.user.create({
-                data : {
-                    email : body.email.toLowerCase(),
-                    password : hasPassword,
-                    username : body.username,
-               
-            }
-        })
-            
-        return NextResponse.json({
-            status : "Success",
-        })
+    const hashPassword = createHash("sha256")
+      .update(body.password)
+      .digest("hex");
+    console.log("Hashed Password:", hashPassword);
 
-    } catch (err) {
-        console.log(err)
-        return NextResponse.json({
-            message : `Error ${err}`
-        })
+    const user = await prisma.user.findFirst({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (user) {
+      return NextResponse.json({
+        message: "User is already exists",
+      });
     }
+
+    await prisma.user.create({
+      data: {
+        email: body.email,
+        password: hashPassword,
+        username: body.username,
+      },
+    });
+
+    return NextResponse.json({
+      status: "Success",
+    });
+  } catch (error) {
+    return NextResponse.json({
+      message: "Error :" + error,
+    });
+  }
 }

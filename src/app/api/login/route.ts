@@ -42,10 +42,21 @@ export async function POST(req: NextRequest) {
             expiresIn: "1h"
         })
 
-        return NextResponse.json({
+        const res = NextResponse.json({
             token,
-            ...token_obj
+            token_obj
         })
+
+        res.cookies.set({
+            name: 'token',
+            value: token,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 60 * 60,
+            path: '/'
+        });
+
+        return res;
 
     } catch (err) {
         console.log(err)
