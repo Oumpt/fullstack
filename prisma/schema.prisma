@@ -14,6 +14,7 @@ model Products {
   price   Int
   image   String
   description String?
+  category String?
 }
 
 model User {

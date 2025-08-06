@@ -10,6 +10,7 @@ interface DataType {
   price : number;
   image : string;
   description?: string;
+  category?: string
 }
 
 export default function Home() {
@@ -51,6 +52,9 @@ export default function Home() {
                 <h4 className="mt-4 text-lg font-semibold">{product.name}</h4>
                 <p className="text-red-600 font-bold">{product.price}</p>
                 <p className="mt-2 text-gray-700">{product.description}</p>
+                <p className="inline-block px-3 py-1 text-gray-700 bg-blue-100 border border-blue-300 rounded-full">
+                  {product.category}
+                </p>
               </div>
             ))}
           </div>
