@@ -28,7 +28,7 @@ export default function LoginPage() {
                     }, 5000);
                 } else {
                     setLogin(true)
-                    router.push('/dashboard')
+                    window.location.href = "/dashboard";
                 }
             }
         } catch (error) {
@@ -38,22 +38,6 @@ export default function LoginPage() {
             setLoading(false)
         }
     }
-
-    useEffect(() => {
-        async function checkAuth() {
-            try {
-                const res = await axios.get("/api/me");
-                if (res.data.user) {
-                    router.replace("/dashboard");
-                }
-            } catch {
-            }
-        }
-        checkAuth();
-    }, [router]);
-
-
-
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">

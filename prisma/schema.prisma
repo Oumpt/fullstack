@@ -9,20 +9,20 @@ datasource db {
 }
 
 model Products {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
-  price   Int
-  image   String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  price Int
+  image String
   description String?
   category String?
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String
-  email    String @unique
-  password String
-
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      String?
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
 }

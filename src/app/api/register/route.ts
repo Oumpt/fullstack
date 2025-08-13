@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { sign } from "jsonwebtoken";
 
 interface RegisterBody {
   email: string;
@@ -42,9 +41,10 @@ export async function POST(req: NextRequest) {
 
     await prisma.user.create({
       data: {
-        email: body.email,
+        email: body.email.toLowerCase(),
         password: hashPassword,
         username: body.username,
+        role: "user"
       },
     });
 

@@ -1,51 +1,62 @@
-import { prisma } from "@/lib/prisma";
-import { createHash } from "crypto";
-import { NextRequest, NextResponse } from "next/server";
-import { sign } from "jsonwebtoken"
+import { prisma } from '@/lib/prisma';
+import { createHash } from 'crypto';
+import { NextRequest, NextResponse } from 'next/server';
+import { sign } from 'jsonwebtoken';
+
 interface LoginBody {
     email: string;
     password: string;
 }
+
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json() as LoginBody;
 
         if (!body) return NextResponse.json({
-            message: "Body inVaild"
-        })
-        if (!body.email || !body.password) return NextResponse.json({
-            message: "Please enter email and password"
-        })
-        const hasPassword = createHash('sha256').update(body.password).digest('hex')
-        console.log(hasPassword)
-        const user = await prisma.user.findFirst({
-            where: {
-                email: body.email
-            }
-        })
-        
-        if (!user) return NextResponse.json({
-            message: "email or password incorrect"
+            message: 'Body Invalid',
         })
 
-        if (user.password !== hasPassword) return NextResponse.json({
-            message: "email or password incorrect"
+        if (!body.email || !body.password) return NextResponse.json({
+            message: 'Please provide email and password',
         })
+
+        const hashPassword = createHash('sha256').update(body.password).digest('hex');
+        console.log('Hashed Password:', hashPassword);
+
+        const user = await prisma.user.findFirst({
+            where: {
+                email: body.email.toLowerCase()
+            },
+        })
+
+        if (!user) {
+            return NextResponse.json({
+                message: 'Email or password is incorrect'
+            });
+        }
+
+        if (user.password !== hashPassword) {
+            return NextResponse.json({
+                message: 'Email or password is incorrect'
+            });
+        }
 
         const token_obj = {
             userId: user.id,
             email: user.email,
             username: user.username,
-            role: "customer"
+            role: user.role
         }
+
         const token = sign(token_obj, process.env.JWT_KEY!, {
-            expiresIn: "1h"
-        })
+            expiresIn: '1h',
+        });
+
 
         const res = NextResponse.json({
             token,
-            token_obj
-        })
+            token_obj,
+        });
 
         res.cookies.set({
             name: 'token',
@@ -53,15 +64,15 @@ export async function POST(req: NextRequest) {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 60 * 60,
-            path: '/'
+            path: '/',
         });
 
         return res;
 
-    } catch (err) {
-        console.log(err)
+
+    } catch (error) {
         return NextResponse.json({
-            message : `Error ${err}`
-        })
+            message: 'Error :' + error,
+        });
     }
 }
