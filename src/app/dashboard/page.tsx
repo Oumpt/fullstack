@@ -112,7 +112,7 @@ export default function Dashboard() {
           )}
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mb-1">{product.name}</h3>
-        <p className="text-blue-600 font-bold mb-2">${product.price.toFixed(2)}</p>
+        <p className="text-blue-600 font-bold mb-2">{product.price.toFixed(2)}</p>
         <p className="text-gray-600 text-sm mb-1 truncate">{product.description || "-"}</p>
         <p className="text-gray-500 text-xs mb-4">{product.category || "-"}</p>
         <div className="mt-auto flex justify-between gap-2">
