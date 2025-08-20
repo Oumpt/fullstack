@@ -89,70 +89,50 @@ export default function Dashboard() {
           </button>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300 shadow-sm">
-            <thead className="bg-blue-100">
-              <tr>
-                <th className="border border-gray-300 p-3 text-left">รูปภาพ</th>
-                <th className="border border-gray-300 p-3 text-left">ชื่อ</th>
-                <th className="border border-gray-300 p-3 text-right">ราคา</th>
-                <th className="border border-gray-300 p-3 text-left">คำอธิบาย</th>
-                <th className="border border-gray-300 p-3 text-left">ประเภท</th>
-                <th className="border border-gray-300 p-3 text-center">จัดการ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="text-center p-8 text-gray-500">
-                    ไม่มีสินค้า
-                  </td>
-                </tr>
-              ) : (
-                products.map((product) => (
-                  <tr
-                    key={product.id}
-                    className="hover:bg-gray-50 transition-colors"
-                  >
-                    <td className="border border-gray-300 p-2 flex justify-center items-center">
-                      {product.image ? (
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-20 h-20 object-cover rounded"
-                        />
-                      ) : (
-                        <span className="text-gray-400 italic">ไม่มีรูป</span>
-                      )}
-                    </td>
-                    <td className="border border-gray-300 p-3">{product.name}</td>
-                    <td className="border border-gray-300 p-3 text-right font-semibold text-gray-700">
-                      ${product.price.toFixed(2)}
-                    </td>
-                    <td className="border border-gray-300 p-3 max-w-xs truncate">
-                      {product.description || "-"}
-                    </td>
-                    <td className="border border-gray-300 p-3">{product.category || "-"}</td>
-                    <td className="border border-gray-300 p-3 text-center space-x-2">
-                      <button
-                        onClick={() => openEditModal(product)}
-                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition"
-                      >
-                        แก้ไข
-                      </button>
-                      <button
-                        onClick={() => handleDeleteProduct(product.id)}
-                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
-                      >
-                        ลบ
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  {products.length === 0 ? (
+    <div className="col-span-full text-center text-gray-500 py-10">
+      ไม่มีสินค้า
+    </div>
+  ) : (
+    products.map((product) => (
+      <div
+        key={product.id}
+        className="border border-gray-200 rounded-lg shadow hover:shadow-md transition p-4 bg-white flex flex-col"
+      >
+        <div className="w-full h-48 bg-gray-100 rounded flex justify-center items-center overflow-hidden mb-4">
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <span className="text-gray-400 italic">ไม่มีรูป</span>
+          )}
         </div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-1">{product.name}</h3>
+        <p className="text-blue-600 font-bold mb-2">${product.price.toFixed(2)}</p>
+        <p className="text-gray-600 text-sm mb-1 truncate">{product.description || "-"}</p>
+        <p className="text-gray-500 text-xs mb-4">{product.category || "-"}</p>
+        <div className="mt-auto flex justify-between gap-2">
+          <button
+            onClick={() => openEditModal(product)}
+            className="flex-1 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm"
+          >
+            แก้ไข
+          </button>
+          <button
+            onClick={() => handleDeleteProduct(product.id)}
+            className="flex-1 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+          >
+            ลบ
+          </button>
+        </div>
+      </div>
+    ))
+  )}
+</div>
       </div>
 
       {/* Edit Modal */}
