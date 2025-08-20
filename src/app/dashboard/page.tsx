@@ -43,7 +43,6 @@ export default function Dashboard() {
   function openEditModal(product: Products) {
     setEditingProduct(product);
   }
-
   function closeEditModal() {
     setEditingProduct(null);
   }
@@ -80,35 +79,32 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto bg-white shadow rounded-lg p-6">
-        <div className="flex justify-start p-4 border-b border-gray-200 mb-6">
+      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-start mb-6">
           <button
             onClick={() => setShowAddModal(true)}
-            className="bg-green-600 text-white px-5 py-2 rounded-md shadow hover:bg-green-700 transition"
+            className="bg-green-600 text-white px-5 py-2 rounded-lg shadow hover:bg-green-700 transition"
           >
             เพิ่มสินค้าใหม่
           </button>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-300 rounded-lg overflow-hidden">
-            <thead className="bg-gray-100">
+          <table className="w-full border-collapse border border-gray-300 shadow-sm">
+            <thead className="bg-blue-100">
               <tr>
-                <th className="border border-gray-300 p-3 text-center w-28">รูปภาพ</th>
+                <th className="border border-gray-300 p-3 text-left">รูปภาพ</th>
                 <th className="border border-gray-300 p-3 text-left">ชื่อ</th>
-                <th className="border border-gray-300 p-3 text-right w-28">ราคา</th>
-                <th className="border border-gray-300 p-3 text-left max-w-xs">คำอธิบาย</th>
-                <th className="border border-gray-300 p-3 text-left w-32">ประเภท</th>
-                <th className="border border-gray-300 p-3 text-center w-40">จัดการ</th>
+                <th className="border border-gray-300 p-3 text-right">ราคา</th>
+                <th className="border border-gray-300 p-3 text-left">คำอธิบาย</th>
+                <th className="border border-gray-300 p-3 text-left">ประเภท</th>
+                <th className="border border-gray-300 p-3 text-center">จัดการ</th>
               </tr>
             </thead>
             <tbody>
               {products.length === 0 ? (
                 <tr>
-                  <td
-                    colSpan={6}
-                    className="text-center text-gray-400 p-6 italic"
-                  >
+                  <td colSpan={6} className="text-center p-8 text-gray-500">
                     ไม่มีสินค้า
                   </td>
                 </tr>
@@ -118,38 +114,35 @@ export default function Dashboard() {
                     key={product.id}
                     className="hover:bg-gray-50 transition-colors"
                   >
-                    <td className="border border-gray-300 p-2 text-center">
+                    <td className="border border-gray-300 p-2 flex justify-center items-center">
                       {product.image ? (
                         <img
                           src={product.image}
                           alt={product.name}
-                          className="inline-block h-20 w-20 object-cover rounded-md shadow-sm"
+                          className="w-20 h-20 object-cover rounded"
                         />
                       ) : (
                         <span className="text-gray-400 italic">ไม่มีรูป</span>
                       )}
                     </td>
-                    <td className="border border-gray-300 p-2 font-medium">{product.name}</td>
-                    <td className="border border-gray-300 p-2 text-right font-semibold">
+                    <td className="border border-gray-300 p-3">{product.name}</td>
+                    <td className="border border-gray-300 p-3 text-right font-semibold text-gray-700">
                       ${product.price.toFixed(2)}
                     </td>
-                    <td
-                      className="border border-gray-300 p-2 max-w-xs truncate"
-                      title={product.description ?? ""}
-                    >
+                    <td className="border border-gray-300 p-3 max-w-xs truncate">
                       {product.description || "-"}
                     </td>
-                    <td className="border border-gray-300 p-2">{product.category || "-"}</td>
-                    <td className="border border-gray-300 p-2 text-center space-x-3">
+                    <td className="border border-gray-300 p-3">{product.category || "-"}</td>
+                    <td className="border border-gray-300 p-3 text-center space-x-2">
                       <button
                         onClick={() => openEditModal(product)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow transition"
+                        className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 transition"
                       >
                         แก้ไข
                       </button>
                       <button
                         onClick={() => handleDeleteProduct(product.id)}
-                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded shadow transition"
+                        className="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700 transition"
                       >
                         ลบ
                       </button>
@@ -162,61 +155,63 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Edit Modal */}
       {editingProduct && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 max-w-full mx-4">
-            <h2 className="text-xl font-bold mb-4 text-center text-gray-800">
-              แก้ไขสินค้า
-            </h2>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h2 className="text-2xl font-bold mb-6 text-blue-700">แก้ไขสินค้า</h2>
+
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={editingProduct.name}
               onChange={(e) =>
                 setEditingProduct({ ...editingProduct, name: e.target.value })
               }
+              placeholder="ชื่อสินค้า"
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               type="number"
               value={editingProduct.price}
               onChange={(e) =>
                 setEditingProduct({ ...editingProduct, price: +e.target.value })
               }
+              placeholder="ราคา"
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={editingProduct.description ?? ""}
               onChange={(e) =>
-                setEditingProduct({
-                  ...editingProduct,
-                  description: e.target.value,
-                })
+                setEditingProduct({ ...editingProduct, description: e.target.value })
               }
+              placeholder="คำอธิบาย"
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={editingProduct.category ?? ""}
               onChange={(e) =>
                 setEditingProduct({ ...editingProduct, category: e.target.value })
               }
+              placeholder="ประเภท"
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="ลิงก์รูปภาพ"
               value={editingProduct.image}
               onChange={(e) =>
                 setEditingProduct({ ...editingProduct, image: e.target.value })
               }
             />
+
             <div className="flex justify-end space-x-3">
               <button
-                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition"
+                className="bg-gray-300 px-5 py-2 rounded hover:bg-gray-400 transition"
                 onClick={closeEditModal}
               >
                 ยกเลิก
               </button>
               <button
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                className="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition"
                 onClick={handleUpdateProduct}
               >
                 บันทึก
@@ -226,62 +221,53 @@ export default function Dashboard() {
         </div>
       )}
 
+      {/* Add Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 max-w-full mx-4">
-            <h2 className="text-xl font-bold mb-4 text-center text-gray-800">
-              เพิ่มสินค้า
-            </h2>
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <h2 className="text-2xl font-bold mb-6 text-blue-700">เพิ่มสินค้า</h2>
+
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="ชื่อสินค้า"
               value={newProduct.name}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, name: e.target.value })
-              }
+              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="ราคา"
               type="number"
               value={newProduct.price}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, price: +e.target.value })
-              }
+              onChange={(e) => setNewProduct({ ...newProduct, price: +e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-3 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="คำอธิบาย"
               value={newProduct.description}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, description: e.target.value })
-              }
+              onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="ประเภท"
               value={newProduct.category}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, category: e.target.value })
-              }
+              onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
             />
             <input
-              className="w-full border border-gray-300 p-2 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="ลิงก์รูปภาพ"
               value={newProduct.image}
-              onChange={(e) =>
-                setNewProduct({ ...newProduct, image: e.target.value })
-              }
+              onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
             />
+
             <div className="flex justify-end space-x-3">
               <button
-                className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400 transition"
+                className="bg-gray-300 px-5 py-2 rounded hover:bg-gray-400 transition"
                 onClick={() => setShowAddModal(false)}
               >
                 ยกเลิก
               </button>
               <button
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
                 onClick={handleAddProduct}
               >
                 บันทึก
