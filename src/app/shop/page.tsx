@@ -237,7 +237,7 @@ export default function Shop() {
               >
                 <option value="name">Sort by Name</option>
                 <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="price-high">Price: High to low</option>
               </select>
             </div>
 
