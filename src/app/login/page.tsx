@@ -77,7 +77,7 @@ export default function LoginPage() {
                     onClick={login}
                     className="w-full py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-1 font-semibold transition"
                 >
-                    {loginSuccess ? "เข้าสู่ระบบสำเร็จ" : loading ? "กำลังเข้าสูาระบบ" : message != "" ? message : "Login"}
+                    {loginSuccess ? "เข้าสู่ระบบสำเร็จ" : loading ? "กำลังเข้าสู่ระบบ" : message != "" ? message : "Login"}
                 </button>
                 <p className="mt-6 text-sm text-center text-gray-600">
                     Don't have an account?{' '}
