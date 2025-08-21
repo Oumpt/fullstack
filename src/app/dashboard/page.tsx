@@ -17,7 +17,6 @@ export default function Dashboard() {
       try {
         const res = await fetch("/api/dashboard/stats");
         const data = await res.json();
-        console.log("Stats from API:", data); // ✅ debug ดูค่า API
         setStats(data);
       } catch (error) {
         console.error("Error fetching stats:", error);
@@ -39,76 +38,44 @@ export default function Dashboard() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p className="text-gray-600 mt-2">
-              Welcome back! Here's what's happening with your store.
-            </p>
+            <p className="text-gray-600 mt-2">Welcome back! Here's what's happening with your store.</p>
           </div>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <StatBox
-              label="Total Users"
-              value={stats.users}
+            <StatBox 
+              label="Total Users" 
+              value={stats.users} 
               loading={loading}
               icon={
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-2.25a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-2.25a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               }
               bgColor="bg-blue-600"
               change="+12%"
               changeType="positive"
             />
-            <StatBox
-              label="Total Products"
-              value={stats.products}
+            <StatBox 
+              label="Total Products" 
+              value={stats.products} 
               loading={loading}
               icon={
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                  />
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
               }
               bgColor="bg-green-600"
               change="+5%"
               changeType="positive"
             />
-            <StatBox
-              label="Total Orders"
-              value={stats.orders}
+            <StatBox 
+              label="Total Orders" 
+              value={stats.orders} 
               loading={loading}
               icon={
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                  />
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               }
               bgColor="bg-purple-600"
@@ -119,27 +86,15 @@ export default function Dashboard() {
 
           {/* Quick Actions */}
           <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              Quick Actions
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <ActionCard
                 title="Manage Products"
                 description="Add, edit, or remove products"
                 href="/dashboard/products"
                 icon={
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                    />
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                 }
               />
@@ -148,18 +103,8 @@ export default function Dashboard() {
                 description="View and manage user accounts"
                 href="/dashboard/users"
                 icon={
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-2.25a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-2.25a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 }
               />
@@ -168,18 +113,8 @@ export default function Dashboard() {
                 description="Monitor and process orders"
                 href="/dashboard/orders"
                 icon={
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                    />
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
                 }
               />
@@ -188,18 +123,8 @@ export default function Dashboard() {
                 description="View sales and performance"
                 href="#"
                 icon={
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    />
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 }
               />
@@ -208,9 +133,7 @@ export default function Dashboard() {
 
           {/* Recent Activity */}
           <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
-              Recent Activity
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Recent Activity</h2>
             <div className="space-y-4">
               <ActivityItem
                 action="New user registered"
@@ -237,12 +160,9 @@ export default function Dashboard() {
                 type="order"
               />
             </div>
-
+            
             <div className="mt-6 text-center">
-              <Link
-                href="#"
-                className="text-black hover:underline text-sm font-medium"
-              >
+              <Link href="#" className="text-black hover:underline text-sm font-medium">
                 View all activity →
               </Link>
             </div>
@@ -253,26 +173,17 @@ export default function Dashboard() {
   );
 }
 
-/* ✅ StatBox Component */
 interface StatBoxProps {
   label: string;
-  value: number | undefined;
+  value: number;
   loading: boolean;
   icon: React.ReactNode;
   bgColor: string;
   change?: string;
-  changeType?: "positive" | "negative";
+  changeType?: 'positive' | 'negative';
 }
 
-function StatBox({
-  label,
-  value,
-  loading,
-  icon,
-  bgColor,
-  change,
-  changeType,
-}: StatBoxProps) {
+function StatBox({ label, value, loading, icon, bgColor, change, changeType }: StatBoxProps) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
       <div className="p-6">
@@ -282,28 +193,20 @@ function StatBox({
             {loading ? (
               <div className="h-8 w-16 bg-gray-200 animate-pulse rounded"></div>
             ) : (
-              <p className="text-3xl font-bold text-gray-900">
-                {value === undefined ? "-" : Number(value).toLocaleString()}
-              </p>
+              <p className="text-3xl font-bold text-gray-900">{value.toLocaleString()}</p>
             )}
             {change && (
               <div className="mt-2 flex items-center">
-                <span
-                  className={`text-sm font-medium ${
-                    changeType === "positive" ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {changeType === "positive" ? "↗" : "↘"} {change}
+                <span className={`text-sm font-medium ${
+                  changeType === 'positive' ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  {changeType === 'positive' ? '↗' : '↘'} {change}
                 </span>
-                <span className="text-sm text-gray-500 ml-1">
-                  from last month
-                </span>
+                <span className="text-sm text-gray-500 ml-1">from last month</span>
               </div>
             )}
           </div>
-          <div
-            className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center`}
-          >
+          <div className={`w-12 h-12 ${bgColor} rounded-lg flex items-center justify-center`}>
             {icon}
           </div>
         </div>
@@ -312,7 +215,6 @@ function StatBox({
   );
 }
 
-/* ✅ ActionCard Component */
 interface ActionCardProps {
   title: string;
   description: string;
@@ -332,7 +234,9 @@ function ActionCard({ title, description, href, icon }: ActionCardProps) {
             <h3 className="text-sm font-semibold text-gray-900 group-hover:text-black">
               {title}
             </h3>
-            <p className="text-xs text-gray-500 mt-1 truncate">{description}</p>
+            <p className="text-xs text-gray-500 mt-1 truncate">
+              {description}
+            </p>
           </div>
         </div>
       </div>
@@ -340,68 +244,37 @@ function ActionCard({ title, description, href, icon }: ActionCardProps) {
   );
 }
 
-/* ✅ ActivityItem Component */
 interface ActivityItemProps {
   action: string;
   description: string;
   time: string;
-  type: "user" | "order" | "product";
+  type: 'user' | 'order' | 'product';
 }
 
 function ActivityItem({ action, description, time, type }: ActivityItemProps) {
   const getTypeIcon = () => {
     switch (type) {
-      case "user":
+      case 'user':
         return (
           <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
+            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
         );
-      case "order":
+      case 'order':
         return (
           <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-              />
+            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
         );
-      case "product":
+      case 'product':
         return (
           <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-purple-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-              />
+            <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
           </div>
         );
